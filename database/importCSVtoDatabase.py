@@ -23,7 +23,6 @@ for i, name in enumerate(column_names):
         sql_create_table += ','
     sql_create_table += f'"{str(name)}" TEXT'
 sql_create_table += ');'
-
 try:
     cur.execute(sql_create_table)
     conn.commit()
@@ -39,6 +38,8 @@ for row in data:
             sql_insert_data += ","
         sql_insert_data += f'"{str(item)}"'
     sql_insert_data += ");"
-    # print(sql_insert_data)
     cur.execute(sql_insert_data)
 conn.commit()
+
+# Close connection
+conn.close()
