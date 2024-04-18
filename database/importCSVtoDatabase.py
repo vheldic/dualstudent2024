@@ -21,7 +21,7 @@ sql_create_table = 'CREATE TABLE IF NOT EXISTS "customers_sales_2021_2022"('
 for i, name in enumerate(column_names):
     if i:   # print a separator if this isn't the first element
         sql_create_table += ','
-    sql_create_table += f'"{str(name)}" TEXT'
+    sql_create_table += f'"{name.lower().replace(" ","_")}" TEXT'
 sql_create_table += ');'
 try:
     cur.execute(sql_create_table)
@@ -36,7 +36,7 @@ for row in data:
     for i, item in enumerate(row):
         if i:   # print a separator if this isn't the first element
             sql_insert_data += ","
-        sql_insert_data += f'"{str(item)}"'
+        sql_insert_data += f'"{item}"'
     sql_insert_data += ");"
     cur.execute(sql_insert_data)
 conn.commit()
