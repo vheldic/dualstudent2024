@@ -1,19 +1,16 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
 
 @app.route('/get_customers_sales_2021_2022')
-def get_firstcustomers():
-    return get_customers(1)
-
-@app.route('/get_customers_sales_2021_2022/<int:pagination>')
-def get_customers(pagination):
-    start = 30 * (pagination-1)
-    numberItems = 30
+def get_customers():
+    searchby = request.args.get('searchby')
+    search = request.args.get('search')
+    orderby = request.args.get('orderby')
     conn = sqlite3.connect('database/database.db')
     cursor = conn.cursor()
-    cursor.execute(f'SELECT * FROM customers_sales_2021_2022 LIMIT {start},{numberItems}')
+    cursor.execute(f'SELECT * FROM customers_sales_2021_2022 WHERE "{searchby}" LIKE "{search}%" ORDER BY "first_name" {orderby}')
     data = cursor.fetchall()
     conn.close()
     return jsonify(data)
