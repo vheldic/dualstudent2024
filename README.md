@@ -9,6 +9,7 @@ https://github.com/vheldic/dualstudent2024.git
 2. Install the required dependencies:
 ```
 pip install Flask
+pip install flask-cors
 ```
 3. If SQLite is not already installed, you can download it from the SQLite website:
 ```
