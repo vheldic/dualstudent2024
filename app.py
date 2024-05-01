@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
 import sqlite3
+from flask_cors import cross_origin
 
 app = Flask(__name__)
 
 @app.route('/get_customers_sales_2021_2022')
+@cross_origin()
 def get_customers():
     searchby = request.args.get('searchby')
     search = request.args.get('search')
